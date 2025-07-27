@@ -1,0 +1,8 @@
+.bordered-box {
+    -fx-padding: 15;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 2;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-background-color: #f9f9f9;
+}

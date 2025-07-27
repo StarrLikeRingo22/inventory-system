@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" prefHeight="623.0" prefWidth="791.0" spacing="20" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.inventorysystem.controller.ProductController">
+    <HBox spacing="20">
+        <VBox spacing="10">
+            <Label style="-fx-font-size: 20px" text="Add Product" />
+            <TextField fx:id="idField" editable="false" promptText="Product ID" />
+            <TextField fx:id="nameField" promptText="Product Name" />
+            <TextField fx:id="inventoryField" promptText="Inventory Level" />
+            <TextField fx:id="priceField" prefHeight="25.0" prefWidth="250.0" promptText="Price" />
+            <HBox spacing="2">
+                <TextField fx:id="minField" promptText="Min" />
+                <TextField fx:id="maxField" promptText="Max" />
+            </HBox>
+        </VBox>
+
+        <VBox spacing="20">
+            <VBox spacing="10" style="-fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 2; -fx-padding: 10; -fx-background-color: #f9f9f9;">
+                <HBox alignment="TOP_RIGHT" spacing="10">
+                    <Label alignment="TOP_LEFT" prefHeight="25.0" prefWidth="241.0" style="-fx-font-size: 16px;" text="Parts" />
+                    <TextField promptText="Search Parts" />
+                    <Button prefHeight="25.0" prefWidth="66.0" text="Search" />
+                </HBox>
+                <TableView fx:id="partsTableView" prefHeight="195.0" prefWidth="400.0">
+                    <columns>
+                        <TableColumn fx:id="partIDColumn" text="Part ID" />
+                        <TableColumn fx:id="partNameColumn" text="Part Name" />
+                        <TableColumn fx:id="partInventoryLevelColumn" text="Inventory Level" />
+                        <TableColumn fx:id="partPriceColumn" text="Price / Cost Per Unit" />
+                    </columns>
+                </TableView>
+                <HBox alignment="BOTTOM_RIGHT" spacing="20">
+                    <Button text="Add" onAction="#handleAddPart" />
+
+                </HBox>
+            </VBox>
+
+            <VBox spacing="10" style="-fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 2; -fx-padding: 10; -fx-background-color: #f9f9f9;">
+                <HBox alignment="TOP_RIGHT" spacing="10">
+                    <Label alignment="TOP_LEFT" prefHeight="25.0" prefWidth="460.0" style="-fx-font-size: 16px;" text="Associated Parts" />
+                </HBox>
+                <TableView fx:id="associatedPartsTableView" prefHeight="195.0" prefWidth="400.0">
+                    <columns>
+                        <TableColumn fx:id="associatedPartIDColumn" text="Part ID" />
+                        <TableColumn fx:id="associatedPartNameColumn" text="Part Name" />
+                        <TableColumn fx:id="associatedPartInventoryLevelColumn" text="Inventory Level" />
+                        <TableColumn fx:id="associatedPartPriceColumn" text="Price / Cost Per Unit" />
+                    </columns>
+                </TableView>
+                <HBox alignment="BOTTOM_RIGHT" spacing="10">
+                    <Button text="Remove Associated Part" onAction="#handleDeleteAssociatedPart" />
+
+                </HBox>
+                <HBox alignment="BOTTOM_RIGHT" spacing="20">
+                    <Button text="Save" onAction="#handleSave"/>
+
+                    <Button text="Cancel" onAction="#handleCancel"/>
+                </HBox>
+            </VBox>
+        </VBox>
+    </HBox>
+</VBox>

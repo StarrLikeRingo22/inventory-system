@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" prefHeight="463.0" prefWidth="373.0" spacing="20" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.example.inventorysystem.controller.PartController">
+    <Label text="Add Part" style="-fx-font-size: 20px" />
+    <HBox spacing="10" alignment="CENTER">
+        <RadioButton fx:id="inHouseRadioButton" text="In-House" />
+        <RadioButton fx:id="outsourcedRadioButton" text="Outsourced" />
+    </HBox>
+    <TextField fx:id="idField" editable="false" prefHeight="25.0" prefWidth="115.0" promptText="Part ID" />
+    <TextField fx:id="nameField" promptText="Part Name" />
+    <TextField fx:id="inventoryField" promptText="Inventory Level" />
+    <TextField fx:id="priceField" promptText="Price" />
+    <HBox spacing="10" alignment="CENTER">
+        <TextField fx:id="minField" promptText="Min"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <TextField fx:id="maxField" promptText="Max"/>
+
+    </HBox>
+    <Label fx:id="machineLabel" text="Machine ID" GridPane.rowIndex="5" GridPane.columnIndex="0" />
+    <TextField fx:id="machineField" promptText=" " />
+
+    <HBox spacing="10" alignment="BOTTOM_RIGHT">
+
+    <Button onAction="#handleSave" text="Save" />
+    <Button onAction="#handleCancel" text="Cancel" />
+    </HBox>
+</VBox>
