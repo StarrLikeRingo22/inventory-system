@@ -1,29 +1,15 @@
-/**********************************************
- Workshop # 4 & 5
- Course:<APD545> - Summer
- Last Name:<Abdelgadir>
- First Name:<Abdalla>
- ID:<113734198>
- Section:<NAA>
- This assignment represents my own work in accordance with Seneca Academic Policy.
- Signature
- Date:<July 18, 2025>
- **********************************************/
-
 package com.example.inventorysystem.controller;
 
 import com.example.inventorysystem.model.InHouse;
 import com.example.inventorysystem.model.Inventory;
 import com.example.inventorysystem.model.Outsourced;
 import com.example.inventorysystem.model.Part;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class PartController {

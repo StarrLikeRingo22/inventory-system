@@ -1,21 +1,14 @@
-/**********************************************
- Workshop # 4 & 5
- Course:<APD545> - Summer
- Last Name:<Abdelgadir>
- First Name:<Abdalla>
- ID:<113734198>
- Section:<NAA>
- This assignment represents my own work in accordance with Seneca Academic Policy.
- Signature
- Date:<July 18, 2025>
- **********************************************/
-
 package com.example.inventorysystem.model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class Inventory {
+import java.io.Serializable;
+
+public class Inventory implements Serializable {
+    private static ObservableList<Part> allParts = FXCollections.observableArrayList();
+    private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
+
     static {
         Part wheel = new InHouse(1, "Wheel", 10, 15.99, 1, 20, 123);
         Inventory.addPart(wheel);
@@ -27,18 +20,8 @@ public class Inventory {
         }
     }
 
-    private static final ObservableList<Part> allParts = FXCollections.observableArrayList();
-    private static final ObservableList<Product> allProducts = FXCollections.observableArrayList();
     private static int productIdCounter = 1;
 
-    public static ObservableList<Part> getAllParts() {
-        return allParts;
-    }
-
-
-    public static ObservableList<Product> getAllProducts() {
-        return allProducts;
-    }
 
     public static void addPart(Part part) {
         allParts.add(part);
@@ -80,5 +63,21 @@ public class Inventory {
 
     public static boolean deleteProduct(Product product) {
         return allProducts.remove(product);
+    }
+
+    public static ObservableList<Part> getAllParts() {
+        return allParts;
+    }
+
+    public static ObservableList<Product> getAllProducts() {
+        return allProducts;
+    }
+
+    public static void setAllParts(ObservableList<Part> parts) {
+        allParts.setAll(parts);
+    }
+
+    public static void setAllProducts(ObservableList<Product> products) {
+        allProducts.setAll(products);
     }
 }

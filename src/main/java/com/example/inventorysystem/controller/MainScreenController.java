@@ -1,17 +1,6 @@
-/**********************************************
- Workshop # 4 & 5
- Course:<APD545> - Summer
- Last Name:<Abdelgadir>
- First Name:<Abdalla>
- ID:<113734198>
- Section:<NAA>
- This assignment represents my own work in accordance with Seneca Academic Policy.
- Signature
- Date:<July 18, 2025>
- **********************************************/
-
 package com.example.inventorysystem.controller;
 
+import com.example.inventorysystem.db.*;
 import com.example.inventorysystem.model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,21 +11,40 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.IOException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class MainScreenController {
 
-    @FXML private TextField searchField;
-    @FXML private TableView<Part> partsTableView;
-    @FXML private TableColumn<Part, Integer> partIDColumn, inventoryLevelColumn;
-    @FXML private TableColumn<Part, String> partNameColumn;
-    @FXML private TableColumn<Part, Double> priceColumn;
+    private enum TableType { PARTS, PRODUCTS }
+    private TableType lastClickedTable = null;
 
-    @FXML private TableView<Product> productsTableView;
-    @FXML private TableColumn<Product, Integer> productIDColumn, productInventoryLevelColumn;
-    @FXML private TableColumn<Product, String> productNameColumn;
-    @FXML private TableColumn<Product, Double> productPriceColumn;
+    public Button btnSaveToFile, btnLoadFromFile, btnSaveToDB, btnLoadFromDB;
+    @FXML
+    private TextField searchField;
+    @FXML
+    private TableView<Part> partsTableView;
+    @FXML
+    private TableColumn<Part, Integer> partIDColumn, inventoryLevelColumn;
+    @FXML
+    private TableColumn<Part, String> partNameColumn;
+    @FXML
+    private TableColumn<Part, Double> priceColumn;
+
+    @FXML
+    private TableView<Product> productsTableView;
+    @FXML
+    private TableColumn<Product, Integer> productIDColumn, productInventoryLevelColumn;
+    @FXML
+    private TableColumn<Product, String> productNameColumn;
+    @FXML
+    private TableColumn<Product, Double> productPriceColumn;
 
     @FXML
     public void initialize() {
@@ -56,7 +64,15 @@ public class MainScreenController {
 
         productsTableView.setItems(Inventory.getAllProducts());
 
+        partsTableView.setOnMouseClicked(e -> {
+            lastClickedTable = TableType.PARTS;
+            System.out.println("Clicked parts table");
+        });
 
+        productsTableView.setOnMouseClicked(e -> {
+            lastClickedTable = TableType.PRODUCTS;
+            System.out.println("Clicked products table");
+        });
     }
 
     @FXML
@@ -186,4 +202,63 @@ public class MainScreenController {
         Inventory.deleteProduct(selectedProduct);
         productsTableView.setItems(Inventory.getAllProducts()); // Refresh table
     }
+
+    // Workshops 6 and 7
+    @FXML
+    private void handleSaveToFile() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("inventory.dat"))) {
+            ArrayList<Part> parts = new ArrayList<>(Inventory.getAllParts());
+            ArrayList<Product> products = new ArrayList<>(Inventory.getAllProducts());
+
+            oos.writeObject(parts);
+            oos.writeObject(products);
+
+            System.out.println("Data saved to file.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleLoadFromFile() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("inventory.dat"))) {
+            ArrayList<Part> parts = (ArrayList<Part>) ois.readObject();
+            ArrayList<Product> products = (ArrayList<Product>) ois.readObject();
+
+            Inventory.setAllParts(FXCollections.observableArrayList(parts));
+            Inventory.setAllProducts(FXCollections.observableArrayList(products));
+
+            System.out.println("Data loaded from file.");
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleLoadFromDB() {
+        if (lastClickedTable == TableType.PARTS) {
+            DBPartHandler.loadPartsFromDB();
+            System.out.println("Loaded parts");
+        } else if (lastClickedTable == TableType.PRODUCTS) {
+            DBProductHandler.loadProductsFromDB();
+            System.out.println("Loaded products");
+        } else {
+            System.out.println("No table clicked yet");
+        }
+    }
+
+    @FXML
+    private void handleSaveToDB() {
+        if (lastClickedTable == TableType.PARTS) {
+            DBPartHandler.savePartsToDB(Inventory.getAllParts());
+            System.out.println("Saved parts");
+        } else if (lastClickedTable == TableType.PRODUCTS) {
+            DBProductHandler.saveProductsToDB(Inventory.getAllProducts());
+            System.out.println("Saved products");
+        } else {
+            System.out.println("No table clicked yet");
+        }
+    }
+
+
 }

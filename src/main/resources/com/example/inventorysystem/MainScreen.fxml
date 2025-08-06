@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" prefHeight="429.0" prefWidth="1024.0" spacing="20" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.inventorysystem.controller.MainScreenController">
+<VBox alignment="CENTER" prefHeight="500.0" prefWidth="1024.0" spacing="20"   xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.inventorysystem.controller.MainScreenController" >
 
     <Label prefHeight="30.0" prefWidth="857.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Inventory Management System" />
 
@@ -16,7 +16,8 @@
         <VBox spacing="10" style="-fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 2; -fx-padding: 10; -fx-background-color: #f9f9f9;">
             <HBox alignment="TOP_RIGHT" spacing="10">
                 <Label alignment="TOP_LEFT" prefHeight="25.0" prefWidth="241.0" style="-fx-font-size: 16px;" text="Parts" />
-                <TextField promptText="Search Parts" /><Button text="Search" />
+                <TextField promptText="Search Parts" />
+                <Button text="Search" />
             </HBox>
             <TableView fx:id="partsTableView" prefHeight="195.0" prefWidth="510.0">
                 <columns>
@@ -55,9 +56,15 @@
                 <Button text="Delete" onAction="#handleDeleteProduct" />
             </HBox>
 
+
         </VBox>
     </HBox>
 
     <Button onAction="#handleExit" prefHeight="25.0" prefWidth="47.0" text="Exit" />
-
+    <HBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml">
+        <Button fx:id="btnSaveToFile" text="Save Data To File" onAction="#handleSaveToFile" />
+        <Button fx:id="btnLoadFromFile" text="Load Data from File" onAction="#handleLoadFromFile" />
+        <Button fx:id="btnSaveToDB" text="Write data on DB" onAction="#handleSaveToDB" />
+        <Button fx:id="btnLoadFromDB" text="Load data from DB" onAction="#handleLoadFromDB" />
+    </HBox>
 </VBox>
