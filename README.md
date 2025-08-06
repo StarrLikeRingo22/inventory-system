@@ -1,4 +1,4 @@
-# JavaFX Inventory Management System
+# Java Inventory Management System
 
 A desktop application built with **JavaFX** for managing parts and products within an inventory system. This project features a clean, modular architecture and integrates with a **MySQL database** using **prepared statements** to ensure secure and efficient data handling.
 
@@ -28,9 +28,6 @@ A desktop application built with **JavaFX** for managing parts and products with
 - MVC Architecture
 - IntelliJ IDEA (or any Java IDE)
 
-pgsql
-Copy
-Edit
 
 ## Database Setup
 
