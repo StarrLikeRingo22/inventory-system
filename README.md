@@ -80,10 +80,6 @@ cd inventory-system
 
 4. **Run `Main.java`**
 
-## Screenshots
-
-> *(Optional — add screenshots of: login screen, product table view, part add/edit window, etc.)*
-
 ## Security
 
 - All SQL queries are protected using **prepared statements** to prevent SQL injection.
